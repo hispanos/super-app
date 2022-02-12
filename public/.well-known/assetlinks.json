@@ -1,0 +1,5 @@
+[{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target" : { "namespace": "android_app", "package_name": "com.evircol.superapp",
+                 "sha256_cert_fingerprints": ["D3:8B:0D:35:D3:06:F8:D0:D3:E1:BD:C7:1D:79:E7:6C:FC:66:52:ED:0E:11:85:A2:8D:CB:28:CF:93:0A:D1:C9"] }
+  }]

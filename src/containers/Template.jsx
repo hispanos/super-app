@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import { useSwipeable } from 'react-swipeable';
 import BannerInstall from '../components/BannerInstall';
 import FooterMenu from '../components/FooterMenu';
 import Header from '../components/Header';
@@ -21,9 +22,17 @@ const Template = () => {
         setOpenMenu(!openMenu)
     }
 
+    const handlers = useSwipeable({ onSwipedRight: () => toggleMenu() })
+    const myRef = useRef();
+
+    const refSwipper = (el) => {
+        handlers.ref(el);
+        myRef.current = el;
+    }
+
 
     return (
-        <div className={theme ? 'theme-light' : 'theme-dark'}>
+        <div className={theme ? 'theme-light' : 'theme-dark'} ref={refSwipper}>
           <div id="page">
             
             <Header 
