@@ -6,7 +6,8 @@ const types = {
     'CLEAN_ERROR_FORM': 'Clean a error from form',
     'DO_REGISTER': 'When a user is register',
     'TOGGLE_ONLINE': 'Toggle Online/Offline',
-    'UPDATE_PROFILE': 'Update profile'
+    'UPDATE_PROFILE': 'Update profile',
+    'TOGGLE_MODAL': 'Actrive Modal'
 }
 
 export default types;

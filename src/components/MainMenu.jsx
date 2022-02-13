@@ -49,7 +49,7 @@ const MainMenu = ({toggleMenu}) => {
                     <span>Mi Saldo</span>
                     <i className="fa fa-angle-right"></i>
                 </Link>
-                <Link id="nav-welcome" to="/">
+                <Link id="nav-welcome" to="/complaint">
                     <i className="fa fa-gavel gradient-blue color-white"></i>
                     <span>Denuncias</span>
                     <i className="fa fa-angle-right"></i>

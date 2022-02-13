@@ -37,14 +37,13 @@ const Service = () => {
 
   return (
       <>
-        <div className="card card-style">
-            <div className="content mb-0">
-                <h3>Bienvenido</h3>
+        <div className="card card-style ms-0 me-0 rounded-0">
+            <div className="content">
+                <p className="mb-n1 color-highlight font-600">Bienvenido</p>
                 <div className="divider"></div>
                 <div>
                     <iframe src={link} height={400} width='100%' />
                 </div>
-                <a className="embedly-card" data-card-controls="0" href="https://themeforest.net/item/sticky-mobile-mobile-template/23229237"></a>
             </div>
         </div>
       </>

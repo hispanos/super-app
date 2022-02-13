@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useOnlineStatus from '@rehooks/online-status';
 import { useForm } from 'react-hook-form';
-import { db } from '../utils/dbLocal';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { doUpdateProfile, doUpdateProfileOffline } from '../redux/actions/UpdateProfile';
-import Swal from 'sweetalert2'
+import ModalSuccess from '../components/ModalAction';
+import { doToggleModal } from '../redux/actions/ActionModal';
 
 
 const Profile = () => {
@@ -15,18 +15,6 @@ const Profile = () => {
 
     const {session} = useSelector((state) => state)
     const {errorForms} = useSelector((state) => state)
-
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-    })
 
     const { register, handleSubmit, formState: { errors }, watch } = useForm({
         defaultValues: {
@@ -44,14 +32,22 @@ const Profile = () => {
         }else {
             dispatch(doUpdateProfileOffline(session.user.id, data))
         }
-
-        if (errorForms?.success) {
-            Toast.fire({
-                icon: 'success',
-                title: 'Actualizado con éxito'
-            })
-        }
     }
+
+    useEffect(() => {
+        if (errorForms?.success || errorForms?.message) {
+            dispatch(doToggleModal({
+                modalActive: true,
+                NameModal: ModalSuccess,
+                props: {
+                    text: 'Actualizado con éxito',
+                    icon: errorForms?.success ? 'fa-check-circle' : 'fa-times-circle',
+                    color: errorForms?.success ? 'green' : 'red'
+                }
+            }))
+        }
+    }, [errorForms])
+    
 
   return (
       <>

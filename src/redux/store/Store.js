@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import thunk from 'redux-thunk';
 import ErrorFormsReducer from "../reducers/ErrorFormsReducer";
 import LoginReducer from "../reducers/LoginReducer";
+import ModalReducer from "../reducers/ModalReducer";
 import OnlineReducer from "../reducers/OnlineReducer";
 import RegisterReducer from "../reducers/RegisterReducer";
 
@@ -9,7 +10,8 @@ const reducers = combineReducers({
     session: LoginReducer,
     errorForms: ErrorFormsReducer,
     register: RegisterReducer,
-    online: OnlineReducer
+    online: OnlineReducer,
+    modal: ModalReducer
 })
 
 const store = createStore(

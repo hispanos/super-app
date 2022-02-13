@@ -1,12 +1,15 @@
 import React, { useRef } from 'react';
 import { useState } from 'react';
-import { useEffect } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { Outlet } from 'react-router-dom';
 import { useSwipeable } from 'react-swipeable';
 import BannerInstall from '../components/BannerInstall';
 import FooterMenu from '../components/FooterMenu';
 import Header from '../components/Header';
 import MainMenu from '../components/MainMenu';
+import { doToggleModal } from '../redux/actions/ActionModal';
+
 
 const Template = () => {
 
@@ -14,12 +17,30 @@ const Template = () => {
     const [theme, setTheme] = useState(true);
     const [openMenu, setOpenMenu] = useState(false);
 
+    const dispatch = useDispatch()
+
+    const {modal, modal: {NameModal}} = useSelector((state) => state)
+
+
     const toggleTheme = () => {
         setTheme(!theme)
     }
 
     const toggleMenu = () => {
         setOpenMenu(!openMenu)
+    }
+
+    const toggleBackground = () => {
+        if (openMenu) {
+            setOpenMenu(false)
+        }
+
+        if (modal.modalActive) {
+            dispatch(doToggleModal({
+                modalActive: false,
+                nameModal: ''
+            }))
+        }
     }
 
     const handlers = useSwipeable({ onSwipedRight: () => toggleMenu() })
@@ -57,11 +78,15 @@ const Template = () => {
 
                 {/* Cualquier modal o menu */}
 
+                {
+                    modal.modalActive && 
+                    <NameModal data={modal.props} />
+                }
+
                 <BannerInstall />
                 
-
           </div>
-          <div className={`menu-hider ${openMenu ? 'menu-active' : ''}`} onClick={toggleMenu}></div>
+          <div className={`menu-hider ${openMenu || modal.modalActive ? 'menu-active' : ''}`} onClick={toggleBackground}></div>
         </div>
     );
 };
