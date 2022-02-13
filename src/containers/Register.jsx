@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import BannerInstall from '../components/BannerInstall';
 
@@ -8,22 +8,11 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import FormRegister from '../components/FormRegister';
 import { doRegister } from '../redux/actions/ActionRegister';
-import Swal from 'sweetalert2'
+import ModalSuccess from '../components/ModalAction';
+import { doToggleModal } from '../redux/actions/ActionModal';
 
 
 const Register = () => {
-
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-    })
 
     let navigate = useNavigate();
     let location = useLocation();
@@ -56,24 +45,56 @@ const Register = () => {
             status: "active"
         }
         dispatch(doRegister(newData))
+    }
+
+    useEffect(() => {
         if(myState.register?.user) {
-            Toast.fire({
-                icon: 'success',
-                title: 'Registrado con éxito'
-            })
+            dispatch(doToggleModal({
+                modalActive: true,
+                NameModal: ModalSuccess,
+                props: {
+                    text: 'Registrado con éxito, serás redirigido en breve',
+                    icon: 'fa-check-circle',
+                    color: 'green'
+                }
+            }))
             setIsRegisterSuccess(true)
             setTimeout(() => {
+                dispatch(doToggleModal({
+                    modalActive: false,
+                    NameModal: ''
+                }))
                 navigate('/login', { replace: true });
             }, 3000)
         }
+    }, [myState.register])
 
-        if (errorForms?.message && !myState.register) {
-            Toast.fire({
-                icon: 'error',
-                title: errorForms?.message
-            })
+    const {modal, modal: {NameModal}} = useSelector((state) => state)
+
+    const toggleBackground = () => {
+        if (modal.modalActive) {
+            dispatch(doToggleModal({
+                modalActive: false,
+                nameModal: ''
+            }))
         }
     }
+
+    useEffect(() => {
+        if (errorForms?.message) {
+            dispatch(doToggleModal({
+                modalActive: true,
+                NameModal: ModalSuccess,
+                props: {
+                    text: errorForms.message,
+                    icon: 'fa-times-circle',
+                    color: 'red'
+                }
+            }))
+        }
+    }, [errorForms])
+    
+    
 
     if(session != null) {
         if(session !== false) {
@@ -97,8 +118,13 @@ const Register = () => {
             
                             </div>
                             {/* Cualquier modal o menu */}
+                            {
+                                modal.modalActive && 
+                                <NameModal data={modal.props} />
+                            }
                             <BannerInstall />
                       </div>
+                      <div className={`menu-hider ${modal.modalActive ? 'menu-active' : ''}`} onClick={toggleBackground}></div>
                     </div>
                 </>
             );
