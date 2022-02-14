@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ModalSuccess = ({data= {}}) => {
+const ModalAction = ({data= {}}) => {
   return (
     <div id="menu-heart" className="menu menu-box-modal rounded-m menu-active" data-menu-hide="800" data-menu-width="250" data-menu-height="170" style={{display: 'block', width: '250px', height: '170px'}}>
                         
@@ -12,4 +12,4 @@ const ModalSuccess = ({data= {}}) => {
   )
 }
 
-export default ModalSuccess
+export default ModalAction

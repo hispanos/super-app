@@ -9,6 +9,7 @@ import FooterMenu from '../components/FooterMenu';
 import Header from '../components/Header';
 import MainMenu from '../components/MainMenu';
 import { doToggleModal } from '../redux/actions/ActionModal';
+import { cleanErrorForm } from '../redux/actions/ErrorForm';
 
 
 const Template = () => {
@@ -41,6 +42,7 @@ const Template = () => {
                 nameModal: ''
             }))
         }
+        dispatch(cleanErrorForm())
     }
 
     const handlers = useSwipeable({ onSwipedRight: () => toggleMenu() })

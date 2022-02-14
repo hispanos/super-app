@@ -40,7 +40,7 @@ const Profile = () => {
                 modalActive: true,
                 NameModal: ModalSuccess,
                 props: {
-                    text: 'Actualizado con éxito',
+                    text: errorForms?.success ? 'Actualizado con éxito' : errorForms.message,
                     icon: errorForms?.success ? 'fa-check-circle' : 'fa-times-circle',
                     color: errorForms?.success ? 'green' : 'red'
                 }

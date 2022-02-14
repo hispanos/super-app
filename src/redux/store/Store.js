@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import thunk from 'redux-thunk';
 import ErrorFormsReducer from "../reducers/ErrorFormsReducer";
+import FormReducer from "../reducers/FormReducer";
 import LoginReducer from "../reducers/LoginReducer";
 import ModalReducer from "../reducers/ModalReducer";
 import OnlineReducer from "../reducers/OnlineReducer";
@@ -11,7 +12,8 @@ const reducers = combineReducers({
     errorForms: ErrorFormsReducer,
     register: RegisterReducer,
     online: OnlineReducer,
-    modal: ModalReducer
+    modal: ModalReducer,
+    form: FormReducer
 })
 
 const store = createStore(

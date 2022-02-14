@@ -19,6 +19,7 @@ import Profile from '../pages/Profile';
 import Register from '../containers/Register';
 import useOnlineStatus from '@rehooks/online-status';
 import Complaint from '../pages/Complaint';
+import Pay from '../pages/Pay';
 
 
 const Router = () => {
@@ -37,6 +38,7 @@ const Router = () => {
                             <Route path="/profile" element={ <Profile /> } />
                             <Route path="/service/:type" element={ <Service /> } />
                             <Route path="/complaint" element={ <Complaint /> } />
+                            <Route path="/pay" element={ <Pay /> } />
                             {/* <Route path="products" element={ <GeneralRoute /> }>
                                 <Route index element={ <ListItems permission={{path: '/products'}} title="Productos" /> } />
                                 <Route path="new" element={ <NewItem title="Nuevo Producto" /> } />

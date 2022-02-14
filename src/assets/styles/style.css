@@ -7326,3 +7326,10 @@ input[type=number] {
 form button {
   width: 100%;
 }
+
+.button-modal {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 10px;
+  width: calc(100% - 30px);
+}

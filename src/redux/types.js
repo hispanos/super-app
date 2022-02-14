@@ -7,7 +7,9 @@ const types = {
     'DO_REGISTER': 'When a user is register',
     'TOGGLE_ONLINE': 'Toggle Online/Offline',
     'UPDATE_PROFILE': 'Update profile',
-    'TOGGLE_MODAL': 'Actrive Modal'
+    'TOGGLE_MODAL': 'Actrive Modal',
+    'SAVE_FORM': 'Save a form',
+    'UPLOAD_FILE': 'Upload a file'
 }
 
 export default types;

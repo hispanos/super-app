@@ -54,6 +54,11 @@ const MainMenu = ({toggleMenu}) => {
                     <span>Denuncias</span>
                     <i className="fa fa-angle-right"></i>
                 </Link>
+                <Link id="nav-welcome" to="/pay">
+                    <i className="fa fa-credit-card gradient-mint color-white"></i>
+                    <span>Pago Servicios</span>
+                    <i className="fa fa-angle-right"></i>
+                </Link>
 
             </div>
             <h6 className="menu-divider mt-4">Configuraciones</h6>
